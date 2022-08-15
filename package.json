@@ -13,9 +13,12 @@
   "dependencies": {
     "cron": "^2.1.0",
     "dotenv": "^16.0.1",
+    "markup": "^0.0.4",
+    "markup-js": "^1.5.21",
     "node-cron": "^3.0.1",
     "node-schedule": "^2.1.0",
     "telegraf": "^4.8.6",
+    "telegraf-markup4": "^1.1.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
