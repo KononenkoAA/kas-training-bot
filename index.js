@@ -58,41 +58,10 @@ bot.command("stop", (ctx) => {
   );
 });
 bot.command("inst", async (ctx) => {
-  await ctx.replyWithHTML(helpText.inst, {
-    reply_markup: {
-      inline_keyboard: [
-        [
-          {
-            text: "Подпишись на спортивный инстаграм тренера",
-            url: "https://instagram.com/artem.online.trainer?igshid=YmMyMTA2M2Y=",
-            callback_data: "sportInst",
-          },
-        ],
-        [
-          {
-            text: "Подпишись на life тренера",
-            url: "https://instagram.com/kononenkoaa?igshid=YmMyMTA2M2Y=",
-            callback_data: "lifeInst",
-          },
-        ],
-      ],
-    },
-  });
-});
+  await ctx.replyWithHTML(helpText.inst
+)});
 bot.command("pay", async (ctx) => {
-  await ctx.replyWithHTML(helpText.pay, {
-    reply_markup: {
-      inline_keyboard: [
-        [
-          {
-            text: "Оплати тренировку прямо сейчас",
-            url: "https://www.tinkoff.ru/rm/kononenko.artem14/OFN0S99169",
-            callback_data: "payOnline",
-          },
-        ],
-      ],
-    },
-  });
+  await ctx.replyWithHTML(helpText.pay);
 });
 bot.command("timetable", async (ctx) => {
   await ctx.reply(helpText.timetable);
