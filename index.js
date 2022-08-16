@@ -261,7 +261,7 @@ function keyboardInst() {
     },
   });
 }
-nodecron.schedule("5 7 * * *", keyboardInst);
+nodecron.schedule("10 10 * * *", keyboardInst);
 
 bot.launch();
 
