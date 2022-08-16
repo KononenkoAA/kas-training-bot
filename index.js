@@ -117,151 +117,85 @@ bot.on("message", async (ctx) => {
   }
 
   if (msg.includes("расписание")) {
-    ctx.reply(helpText.timetable);
+    ctx.reply(helpText.timetable, {
+      reply_markup: {
+        remove_keyboard: true,
+      },
+    });
   }
   if (msg.includes("распсиание")) {
-    ctx.reply(helpText.timetable);
+    ctx.reply(helpText.timetable, {
+      reply_markup: {
+        remove_keyboard: true,
+      },
+    });
   }
   if (msg.includes("распиание")) {
-    ctx.reply(helpText.timetable);
+    ctx.reply(helpText.timetable, {
+      reply_markup: {
+        remove_keyboard: true,
+      },
+    });
   }
 
   if (msg.includes("оплата")) {
-    ctx.reply(helpText.pay, {
+    ctx.replyWithHTML(helpText.pay, {
       reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: "Оплати тренировку прямо сейчас",
-              url: "https://www.tinkoff.ru/rm/kononenko.artem14/OFN0S99169",
-              callback_data: "payOnline",
-            },
-          ],
-        ],
+        remove_keyboard: true,
       },
     });
   }
   if (msg.includes("стоимость")) {
-    ctx.reply(helpText.pay, {
+    ctx.replyWithHTML(helpText.pay, {
       reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: "Оплати тренировку прямо сейчас",
-              url: "https://www.tinkoff.ru/rm/kononenko.artem14/OFN0S99169",
-              callback_data: "payOnline",
-            },
-          ],
-        ],
+        remove_keyboard: true,
       },
     });
   }
   if (msg.includes("сколько стоит")) {
-    ctx.reply(helpText.pay, {
+    ctx.replyWithHTML(helpText.pay, {
       reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: "Оплати тренировку прямо сейчас",
-              url: "https://www.tinkoff.ru/rm/kononenko.artem14/OFN0S99169",
-              callback_data: "payOnline",
-            },
-          ],
-        ],
+        remove_keyboard: true,
       },
     });
   }
 
   if (msg.includes("адрес")) {
-    ctx.reply(helpText.adress, {
+    ctx.replyWithHTML(helpText.adress, {
       reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: "Смотри адрес на картах",
-              url: "https://goo.gl/maps/gTnDtdGi5c9zGtkQ7",
-              callback_data: "payOnline",
-            },
-          ],
-        ],
+        remove_keyboard: true,
       },
     });
   }
   if (msg.includes("гео")) {
-    ctx.reply(helpText.adress, {
+    ctx.replyWithHTML(helpText.adress, {
       reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: "Смотри адрес на картах",
-              url: "https://goo.gl/maps/gTnDtdGi5c9zGtkQ7",
-              callback_data: "payOnline",
-            },
-          ],
-        ],
+        remove_keyboard: true,
       },
     });
   }
 
   if (msg.includes("инста")) {
-    ctx.reply(
-      helpText.inst,
-      {
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: "Подпишись на спортивный инстаграм тренера",
-                url: "https://instagram.com/artem.online.trainer?igshid=YmMyMTA2M2Y=",
-                callback_data: "sportInst",
-              },
-            ],
-            [
-              {
-                text: "Подпишись на life тренера",
-                url: "https://instagram.com/kononenkoaa?igshid=YmMyMTA2M2Y=",
-                callback_data: "lifeInst",
-              },
-            ],
-          ],
-        },
+    ctx.replyWithHTML(helpText.inst, {
+      reply_markup: {
+        remove_keyboard: true,
       },
-      {
-        reply_markup: {
-          remove_keyboard: true,
-        },
-      }
-    );
+    });
   }
   if (msg.includes("телеграм")) {
-    ctx.reply(helpText.telegram);
+    ctx.reply(helpText.telegram, {
+      reply_markup: {
+        remove_keyboard: true,
+      },
+    });
   }
 });
 
 //Автоматическая рассылка сообщения в группу
 function keyboardInst() {
-  bot.telegram.sendMessage(CHAT_ID, helpText.text, {
-    reply_markup: {
-      inline_keyboard: [
-        [
-          {
-            text: "Подпишись на спортивный инстаграм тренера",
-            url: "https://instagram.com/artem.online.trainer?igshid=YmMyMTA2M2Y=",
-            callback_data: "sportInst",
-          },
-        ],
-        [
-          {
-            text: "Подпишись на life тренера",
-            url: "https://instagram.com/kononenkoaa?igshid=YmMyMTA2M2Y=",
-            callback_data: "lifeInst",
-          },
-        ],
-      ],
-    },
-  });
+  bot.telegram.sendMessage(CHAT_ID, helpText.text, { parse_mode: "HTML" });
 }
-nodecron.schedule("10 10 * * *", keyboardInst);
+nodecron.schedule("30 7 * * *", keyboardInst);
 
 bot.launch();
 
