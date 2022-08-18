@@ -204,7 +204,9 @@ bot.on("new_chat_member", async (ctx) => {
 
 //Автоматическая рассылка сообщения в группу
 function keyboardInst() {
-  bot.telegram.sendMessage(CHAT_ID, helpText.text, { parse_mode: "HTML" });
+  bot.telegram.sendMessage(CHAT_ID.CHAT_ID, helpText.text, {
+    parse_mode: "HTML",
+  });
 }
 nodecron.schedule("30 7 * * *", keyboardInst);
 
