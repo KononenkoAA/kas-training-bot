@@ -15,6 +15,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   },
 });
 const helpText = require("./text");
+const CHAT_ID = require("./chat-id");
 
 //Реакция на команду start
 function keyboardStart(ctx) {
@@ -96,9 +97,9 @@ bot.help((ctx) => {
 
 //Рекация на ключевые слова
 bot.on("message", async (ctx) => {
-  try {
-    const msg = ctx.message.text.toLowerCase();
+  const msg = ctx.message.text.toLowerCase();
 
+  if (ctx.message.text !== undefined) {
     if (msg.includes("бот")) {
       ctx.reply(
         helpText.helloBot,
@@ -183,21 +184,21 @@ bot.on("message", async (ctx) => {
         },
       });
     }
-  } catch (error) {
-    console.error(error);
+  } else {
+    ctx.reply("ботик не в ресурсе 😴");
   }
 });
 
-bot.on("new_chat_member", (ctx) => {
-  try {
-    ctx.reply(`Привет, ${ctx.message.new_chat_member.first_name} 😜
+bot.on("new_chat_member", async (ctx) => {
+  if (ctx.message.new_chat_members) {
+    await ctx.reply(`Привет, ${ctx.message.new_chat_member.first_name} 😜
   
-  Мы всегда рады сежей кровушке 🩸😁
+Мы всегда рады сежей кровушке 🩸😁
 
-  Чтобы узнать основную информацию нажми 👉 /start
+Чтобы узнать основную информацию нажми 👉 /start
   `);
-  } catch (error) {
-    console.error(error);
+  } else {
+    ctx.reply("Добро пожаловать в самый спортивный чат Каша 🥳");
   }
 });
 
