@@ -15,7 +15,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   },
 });
 const helpText = require("./text");
-const CHAT_ID = require("./chat-id");
+const CHAT_ID = "-1001778392567";
 
 //Реакция на команду start
 function keyboardStart(ctx) {
@@ -204,7 +204,7 @@ bot.on("new_chat_member", async (ctx) => {
 
 //Автоматическая рассылка сообщения в группу
 function keyboardInst() {
-  bot.telegram.sendMessage(CHAT_ID.CHAT_ID, helpText.text, {
+  bot.telegram.sendMessage(CHAT_ID, helpText.text, {
     parse_mode: "HTML",
   });
 }
