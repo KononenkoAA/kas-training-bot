@@ -16,8 +16,6 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
 });
 const helpText = require("./text");
 
-const CHAT_ID = "-1001778392567";
-
 //Реакция на команду start
 function keyboardStart(ctx) {
   ctx.replyWithHTML("Hi", {
@@ -31,7 +29,11 @@ function keyboardStart(ctx) {
 bot.start(async (ctx) => {
   try {
     await ctx.replyWithHTML(
-      `Привет, <b>${ctx.message.from.first_name}</b> 🤗`,
+      `Привет, <b>${ctx.message.from.first_name}</b> 🤗
+Что ты хочешь узнать?
+
+Или закрой меню 👉 /stop 
+      `,
       Markup.keyboard([
         ["📅 Расписание", "📍 Адрес площадки"],
         ["💵 Стоимость тренировки"],
@@ -45,21 +47,17 @@ bot.start(async (ctx) => {
 
 //Команды через слеш
 bot.command("stop", (ctx) => {
-  ctx.replyWithMarkdown(
-    `*${ctx.message.from.first_name}*, я закрыл клавиатуру, но ты можешь ее вызвать снова.
-
-Просто нажми 👉 /start
-`,
+  ctx.replyWithMarkdown(`${ctx.message.from.first_name} ${helpText.stop}`),
     {
       reply_markup: {
         remove_keyboard: true,
       },
-    }
-  );
+    };
 });
+
 bot.command("inst", async (ctx) => {
-  await ctx.replyWithHTML(helpText.inst
-)});
+  await ctx.replyWithHTML(helpText.inst);
+});
 bot.command("pay", async (ctx) => {
   await ctx.replyWithHTML(helpText.pay);
 });
@@ -160,11 +158,33 @@ bot.on("message", async (ctx) => {
   }
 });
 
+bot.on("new_chat_member", (ctx) => {
+  ctx.reply(`Привет, ${ctx.message.new_chat_member.first_name} 😜
+  
+  Мы всегда рады сежей кровушке 🩸😁
+
+  Чтобы узнать основную информацию нажми 👉 /start
+  `);
+});
+
 //Автоматическая рассылка сообщения в группу
 function keyboardInst() {
   bot.telegram.sendMessage(CHAT_ID, helpText.text, { parse_mode: "HTML" });
 }
 nodecron.schedule("30 7 * * *", keyboardInst);
+
+//Код чтобы heroku пробуждался каждые 20 минут
+const request = require("request");
+const ping = () =>
+  request(
+    "https://git.heroku.com/kas-training-bot.git",
+    (error, response, body) => {
+      console.log("error:", error); // Print the error if one occurred
+      console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
+      console.log("body:", body); // Print body of response received
+    }
+  );
+setInterval(ping, 20 * 60 * 1000); //каждые 20 мин
 
 bot.launch();
 

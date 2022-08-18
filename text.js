@@ -195,6 +195,11 @@ const helloBot = `
 Что ты хочешь узнать?
 `;
 
+const stop = `,я закрыл меню, но ты можешь ее вызвать снова.
+
+Просто нажми 👉 /start
+`
+
 module.exports.help = help;
 module.exports.text = text;
 module.exports.pay = pay;
@@ -204,3 +209,4 @@ module.exports.telegram = telegram;
 module.exports.inst = inst;
 module.exports.timetable = timetable;
 module.exports.helloBot = helloBot;
+module.exports.stop = stop;
