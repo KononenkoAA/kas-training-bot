@@ -47,124 +47,158 @@ bot.start(async (ctx) => {
 
 //Команды через слеш
 bot.command("stop", (ctx) => {
-  ctx.replyWithMarkdown(`${ctx.message.from.first_name} ${helpText.stop}`),
-    {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    };
+  try {
+    ctx.replyWithMarkdown(
+      `${ctx.message.from.first_name}, я закрыл меню, но ты можешь вызвать его снова.
+  
+Просто нажми 👉 /start`,
+      {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      }
+    );
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 bot.command("inst", async (ctx) => {
-  await ctx.replyWithHTML(helpText.inst);
+  try {
+    await ctx.replyWithHTML(helpText.inst);
+  } catch (error) {
+    console.error(error);
+  }
 });
 bot.command("pay", async (ctx) => {
-  await ctx.replyWithHTML(helpText.pay);
+  try {
+    await ctx.replyWithHTML(helpText.pay);
+  } catch (error) {
+    console.error(error);
+  }
 });
 bot.command("timetable", async (ctx) => {
-  await ctx.reply(helpText.timetable);
+  try {
+    await ctx.reply(helpText.timetable);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 //Реакция на команду help
-bot.help((ctx) => ctx.reply(helpText.help));
+bot.help((ctx) => {
+  try {
+    ctx.reply(helpText.help);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 //Рекация на ключевые слова
 bot.on("message", async (ctx) => {
-  const msg = ctx.message.text.toLowerCase();
+  try {
+    const msg = ctx.message.text.toLowerCase();
 
-  if (msg.includes("бот")) {
-    ctx.reply(
-      helpText.helloBot,
-      Markup.keyboard([
-        ["📅 Расписание", "📍 Адрес площадки"],
-        ["💵 Стоимость тренировки"],
-        ["Инстаграм", "Телеграм "],
-      ])
-    );
-  }
+    if (msg.includes("бот")) {
+      ctx.reply(
+        helpText.helloBot,
+        Markup.keyboard([
+          ["📅 Расписание", "📍 Адрес площадки"],
+          ["💵 Стоимость тренировки"],
+          ["Инстаграм", "Телеграм "],
+        ])
+      );
+    }
 
-  if (msg.includes("расписание")) {
-    ctx.reply(helpText.timetable, {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    });
-  }
-  if (msg.includes("распсиание")) {
-    ctx.reply(helpText.timetable, {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    });
-  }
-  if (msg.includes("распиание")) {
-    ctx.reply(helpText.timetable, {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    });
-  }
+    if (msg.includes("расписание")) {
+      ctx.reply(helpText.timetable, {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      });
+    }
+    if (msg.includes("распсиание")) {
+      ctx.reply(helpText.timetable, {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      });
+    }
+    if (msg.includes("распиание")) {
+      ctx.reply(helpText.timetable, {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      });
+    }
 
-  if (msg.includes("оплата")) {
-    ctx.replyWithHTML(helpText.pay, {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    });
-  }
-  if (msg.includes("стоимость")) {
-    ctx.replyWithHTML(helpText.pay, {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    });
-  }
-  if (msg.includes("сколько стоит")) {
-    ctx.replyWithHTML(helpText.pay, {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    });
-  }
+    if (msg.includes("оплата")) {
+      ctx.replyWithHTML(helpText.pay, {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      });
+    }
+    if (msg.includes("стоимость")) {
+      ctx.replyWithHTML(helpText.pay, {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      });
+    }
+    if (msg.includes("сколько стоит")) {
+      ctx.replyWithHTML(helpText.pay, {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      });
+    }
 
-  if (msg.includes("адрес")) {
-    ctx.replyWithHTML(helpText.adress, {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    });
-  }
-  if (msg.includes("гео")) {
-    ctx.replyWithHTML(helpText.adress, {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    });
-  }
+    if (msg.includes("адрес")) {
+      ctx.replyWithHTML(helpText.adress, {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      });
+    }
+    if (msg.includes("гео")) {
+      ctx.replyWithHTML(helpText.adress, {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      });
+    }
 
-  if (msg.includes("инста")) {
-    ctx.replyWithHTML(helpText.inst, {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    });
-  }
-  if (msg.includes("телеграм")) {
-    ctx.reply(helpText.telegram, {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    });
+    if (msg.includes("инста")) {
+      ctx.replyWithHTML(helpText.inst, {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      });
+    }
+    if (msg.includes("телеграм")) {
+      ctx.reply(helpText.telegram, {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      });
+    }
+  } catch (error) {
+    console.error(error);
   }
 });
 
 bot.on("new_chat_member", (ctx) => {
-  ctx.reply(`Привет, ${ctx.message.new_chat_member.first_name} 😜
+  try {
+    ctx.reply(`Привет, ${ctx.message.new_chat_member.first_name} 😜
   
   Мы всегда рады сежей кровушке 🩸😁
 
   Чтобы узнать основную информацию нажми 👉 /start
   `);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 //Автоматическая рассылка сообщения в группу
