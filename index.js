@@ -66,14 +66,16 @@ bot.command("stop", (ctx) => {
 
 bot.command("inst", async (ctx) => {
   try {
-    await ctx.replyWithHTML(helpText.inst);
+    await ctx.replyWithHTML(helpText.inst,
+      {disable_web_page_preview: true,});
   } catch (error) {
     console.error(error);
   }
 });
 bot.command("pay", async (ctx) => {
   try {
-    await ctx.replyWithHTML(helpText.pay);
+    await ctx.replyWithHTML(helpText.pay,
+      {disable_web_page_preview: true});
   } catch (error) {
     console.error(error);
   }
@@ -138,6 +140,7 @@ bot.on("message", async (ctx) => {
         reply_markup: {
           remove_keyboard: true,
         },
+        disable_web_page_preview: true,
       });
     }
     if (msg.includes("стоимость")) {
@@ -145,6 +148,7 @@ bot.on("message", async (ctx) => {
         reply_markup: {
           remove_keyboard: true,
         },
+        disable_web_page_preview: true,
       });
     }
     if (msg.includes("сколько стоит")) {
@@ -152,6 +156,7 @@ bot.on("message", async (ctx) => {
         reply_markup: {
           remove_keyboard: true,
         },
+        disable_web_page_preview: true,
       });
     }
 
