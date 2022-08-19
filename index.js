@@ -194,9 +194,9 @@ bot.on("message", async (ctx) => {
   }
 });
 
-bot.on("new_chat_member", async (ctx) => {
-  if (ctx.message.new_chat_members) {
-    await ctx.reply(`Привет, ${ctx.message.new_chat_member.first_name} 😜
+bot.on("new_chat_member", (ctx) => {
+  if (ctx.message.new_chat_member) {
+    ctx.reply(`Привет, ${ctx.message.new_chat_member.first_name} 😜
   
 Мы всегда рады сежей кровушке 🩸😁
 
