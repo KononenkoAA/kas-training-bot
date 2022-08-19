@@ -219,7 +219,7 @@ nodecron.schedule("30 7 * * *", keyboardInst);
 const request = require("request");
 const ping = () =>
   request(
-    "https://git.heroku.com/kas-training-bot.git",
+    "https://kas-training-bot.herokuapp.com/",
     (error, response, body) => {
       console.log("error:", error); // Print the error if one occurred
       console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
