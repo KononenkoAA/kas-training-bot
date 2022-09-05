@@ -15,6 +15,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   },
 });
 const helpText = require("./text");
+
 const CHAT_ID = "-1001778392567";
 
 //Реакция на команду start
@@ -66,16 +67,14 @@ bot.command("stop", (ctx) => {
 
 bot.command("inst", async (ctx) => {
   try {
-    await ctx.replyWithHTML(helpText.inst,
-      {disable_web_page_preview: true,});
+    await ctx.replyWithHTML(helpText.inst, { disable_web_page_preview: true });
   } catch (error) {
     console.error(error);
   }
 });
 bot.command("pay", async (ctx) => {
   try {
-    await ctx.replyWithHTML(helpText.pay,
-      {disable_web_page_preview: true});
+    await ctx.replyWithHTML(helpText.pay, { disable_web_page_preview: true });
   } catch (error) {
     console.error(error);
   }
@@ -213,7 +212,24 @@ function keyboardInst() {
     parse_mode: "HTML",
   });
 }
+function baseInfo() {
+  bot.telegram.sendMessage(CHAT_ID, helpText.baseInfo, {
+    parse_mode: "HTML",
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: "Инфо по треням",
+            url: "https://telegra.ph/Trenirovki-v-Kashe-08-19",
+          },
+        ],
+      ],
+    },
+  });
+}
+
 nodecron.schedule("30 7 * * *", keyboardInst);
+// nodecron.schedule("57 10 * * *", baseInfo);
 
 //Код чтобы heroku пробуждался каждые 20 минут
 const request = require("request");
