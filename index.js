@@ -229,7 +229,7 @@ function baseInfo() {
 }
 
 nodecron.schedule("30 7 * * *", keyboardInst);
-// nodecron.schedule("57 10 * * *", baseInfo);
+// nodecron.schedule("52 9 * * *", baseInfo);
 
 //Код чтобы heroku пробуждался каждые 20 минут
 const request = require("request");
