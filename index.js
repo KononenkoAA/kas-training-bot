@@ -16,8 +16,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
 });
 const helpText = require("./text");
 
-// const CHAT_ID = "-1001778392567";
-const CHAT_ID = "-1001786233761";
+const CHAT_ID = "-1001778392567";
 
 bot.start(async (ctx) => {
   try {
