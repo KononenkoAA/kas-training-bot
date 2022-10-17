@@ -16,47 +16,25 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
 });
 const helpText = require("./text");
 
-const CHAT_ID = "-1001778392567";
+// const CHAT_ID = "-1001778392567";
+const CHAT_ID = "-1001786233761";
 
-//Реакция на команду start
-function keyboardStart(ctx) {
-  ctx.replyWithHTML("Hi", {
-    reply_markup: Markup.keyboard([
-      ["📅 Расписание", "📍 Адрес площадки"],
-      ["💵 Стоимость тренировки"],
-      ["Инстаграм", "Телеграм "],
-    ]),
-  });
-}
 bot.start(async (ctx) => {
   try {
     await ctx.replyWithHTML(
       `Привет, <b>${ctx.message.from.first_name}</b> 🤗
 Что ты хочешь узнать?
-
-Или закрой меню 👉 /stop 
       `,
-      Markup.keyboard([
-        ["📅 Расписание", "📍 Адрес площадки"],
-        ["💵 Стоимость тренировки"],
-        ["Инстаграм", "Телеграм "],
-      ])
-    );
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-//Команды через слеш
-bot.command("stop", (ctx) => {
-  try {
-    ctx.replyWithMarkdown(
-      `${ctx.message.from.first_name}, я закрыл меню, но ты можешь вызвать его снова.
-  
-Просто нажми 👉 /start`,
       {
         reply_markup: {
-          remove_keyboard: true,
+          keyboard: [
+            [{ text: "📅 Расписание" }, { text: "📍 Адрес площадки" }],
+            [{ text: "💵 Стоимость тренировки" }],
+            [{ text: "Инстаграм" }, { text: "Телеграм" }],
+            [{ text: "Закрыть меню" }],
+          ],
+          resize_keyboard: true,
+          one_time_keyboard: true,
         },
       }
     );
@@ -65,9 +43,37 @@ bot.command("stop", (ctx) => {
   }
 });
 
+//Команды через слеш
+
+// bot.command("stop", (ctx) => {
+//   try {
+//     ctx.replyWithMarkdown(
+//       `${ctx.message.from.first_name}, я закрыл меню, но ты можешь вызвать его снова.
+
+// Просто нажми 👉 /start`,
+//       {
+//         reply_markup: {
+//           remove_keyboard: true,
+//         },
+//       }
+//     );
+//   } catch (error) {
+//     console.error(error);
+//   }
+// });
+
 bot.command("inst", async (ctx) => {
   try {
     await ctx.replyWithHTML(helpText.inst, { disable_web_page_preview: true });
+  } catch (error) {
+    console.error(error);
+  }
+});
+bot.command("adress", async (ctx) => {
+  try {
+    await ctx.replyWithHTML(helpText.adress, {
+      disable_web_page_preview: true,
+    });
   } catch (error) {
     console.error(error);
   }
@@ -102,14 +108,25 @@ bot.on("message", async (ctx) => {
 
   if (ctx.message.text !== undefined) {
     if (msg.includes("бот")) {
-      ctx.reply(
-        helpText.helloBot,
-        Markup.keyboard([
-          ["📅 Расписание", "📍 Адрес площадки"],
-          ["💵 Стоимость тренировки"],
-          ["Инстаграм", "Телеграм "],
-        ])
-      );
+      ctx.reply(helpText.helloBot, {
+        reply_markup: {
+          keyboard: [
+            [{ text: "📅 Расписание" }, { text: "📍 Адрес площадки" }],
+            [{ text: "💵 Стоимость тренировки" }],
+            [{ text: "Инстаграм" }, { text: "Телеграм" }],
+          ],
+          resize_keyboard: true,
+          one_time_keyboard: true,
+        },
+      });
+    }
+
+    if (msg.includes("Закрыть меню")) {
+      ctx.reply(helpText.timetable, {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      });
     }
 
     if (msg.includes("расписание")) {
@@ -166,6 +183,13 @@ bot.on("message", async (ctx) => {
         },
       });
     }
+    if (msg.includes("локация")) {
+      ctx.replyWithHTML(helpText.adress, {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      });
+    }
     if (msg.includes("гео")) {
       ctx.replyWithHTML(helpText.adress, {
         reply_markup: {
@@ -205,6 +229,8 @@ bot.on("new_chat_member", (ctx) => {
     ctx.reply("Добро пожаловать в самый спортивный чат Каша 🥳");
   }
 });
+
+//Удаление сообщений бота
 
 //Автоматическая рассылка сообщения в группу
 function keyboardInst() {
