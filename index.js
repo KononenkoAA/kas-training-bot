@@ -258,21 +258,21 @@ function keyboardInst() {
     parse_mode: "HTML",
   });
 }
-function baseInfo() {
-  bot.telegram.sendMessage(CHAT_ID, helpText.baseInfo, {
-    parse_mode: "HTML",
-    reply_markup: {
-      inline_keyboard: [
-        [
-          {
-            text: "Инфо по треням",
-            url: "https://telegra.ph/Trenirovki-v-Kashe-08-19",
-          },
-        ],
-      ],
-    },
-  });
-}
+// function baseInfo() {
+//   bot.telegram.sendMessage(CHAT_ID, helpText.baseInfo, {
+//     parse_mode: "HTML",
+//     reply_markup: {
+//       inline_keyboard: [
+//         [
+//           {
+//             text: "Инфо по треням",
+//             url: "https://telegra.ph/Trenirovki-v-Kashe-08-19",
+//           },
+//         ],
+//       ],
+//     },
+//   });
+// }
 
 nodecron.schedule("30 7 * * *", keyboardInst);
 // nodecron.schedule("5 13 * * *", baseInfo);
