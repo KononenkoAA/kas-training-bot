@@ -35,10 +35,7 @@ bot.start(async (ctx) => {
           resize_keyboard: true,
           one_time_keyboard: true,
         },
-      },
-
-      ctx.telegram.deleteMessage(ctx.chat.id, ctx.message_id)
-      // setTimeout(del, 5 * 1000)
+      }
     );
   } catch (error) {
     console.error(error);
