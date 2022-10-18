@@ -35,12 +35,31 @@ bot.start(async (ctx) => {
           resize_keyboard: true,
           one_time_keyboard: true,
         },
-      }
+      },
+
+      ctx.telegram.deleteMessage(ctx.chat.id, ctx.message_id)
+      // setTimeout(del, 5 * 1000)
     );
   } catch (error) {
     console.error(error);
   }
 });
+
+// let res = ctx.message;
+// console.log(res);
+
+// bot.command("del", async (ctx) => {
+//   let res = await ctx.reply("deleting");
+//   console.log(res);
+
+//   let result = await ctx.telegram.deleteMessage(ctx.chat.id, res.message_id);
+//   console.log(result);
+// });
+
+// const mess = await ctx.reply();
+// setTimeout(async (ctx)=>{
+// await ctx.telegram.deleteMessage(из mess вытягивай всю инфу)
+// },30*1000)
 
 //Команды через слеш
 
@@ -63,7 +82,9 @@ bot.start(async (ctx) => {
 
 bot.command("inst", async (ctx) => {
   try {
-    await ctx.replyWithHTML(helpText.inst, { disable_web_page_preview: true });
+    await ctx.replyWithHTML(helpText.inst, {
+      disable_web_page_preview: true,
+    });
   } catch (error) {
     console.error(error);
   }
@@ -254,7 +275,7 @@ function baseInfo() {
 }
 
 nodecron.schedule("30 7 * * *", keyboardInst);
-// nodecron.schedule("52 9 * * *", baseInfo);
+// nodecron.schedule("5 13 * * *", baseInfo);
 
 //Код чтобы heroku пробуждался каждые 20 минут
 const request = require("request");
