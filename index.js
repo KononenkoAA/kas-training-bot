@@ -124,13 +124,14 @@ bot.on("message", async (ctx) => {
   const msg = ctx.message.text.toLowerCase();
 
   if (ctx.message.text !== undefined) {
-    if (msg.includes("бот")) {
+    if (msg === "ботик") {
       ctx.reply(helpText.helloBot, {
         reply_markup: {
           keyboard: [
             [{ text: "📅 Расписание" }, { text: "📍 Адрес площадки" }],
             [{ text: "💵 Стоимость тренировки" }],
             [{ text: "Инстаграм" }, { text: "Телеграм" }],
+            [{ text: "Закрыть меню" }],
           ],
           resize_keyboard: true,
           one_time_keyboard: true,
@@ -255,24 +256,24 @@ function keyboardInst() {
     parse_mode: "HTML",
   });
 }
-// function baseInfo() {
-//   bot.telegram.sendMessage(CHAT_ID, helpText.baseInfo, {
-//     parse_mode: "HTML",
-//     reply_markup: {
-//       inline_keyboard: [
-//         [
-//           {
-//             text: "Инфо по треням",
-//             url: "https://telegra.ph/Trenirovki-v-Kashe-08-19",
-//           },
-//         ],
-//       ],
-//     },
-//   });
-// }
+function baseInfo() {
+  bot.telegram.sendMessage(CHAT_ID, helpText.baseInfo, {
+    parse_mode: "HTML",
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: "Инфо по треням",
+            url: "https://telegra.ph/Trenirovki-v-Kashe-08-19",
+          },
+        ],
+      ],
+    },
+  });
+}
 
-nodecron.schedule("30 7 * * *", keyboardInst);
-// nodecron.schedule("5 13 * * *", baseInfo);
+// nodecron.schedule("30 7 * * *", keyboardInst);
+nodecron.schedule("44 17 * * *", baseInfo);
 
 //Код чтобы heroku пробуждался каждые 20 минут
 const request = require("request");
